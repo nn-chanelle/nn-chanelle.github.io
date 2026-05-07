@@ -1,734 +1,946 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Творческая встреча с Екатериной Первушиной — Voci dell'Opera</title>
-<meta name="description" content="Камерная творческая встреча с примой-балериной театра «Кремлёвский балет» Екатериной Первушиной. 24 мая, Москва. Только 15 мест." />
-
-<!-- Open Graph -->
-<meta property="og:title" content="Творческая встреча с Екатериной Первушиной" />
-<meta property="og:description" content="Камерный вечер с примой-балериной «Кремлёвского балета». 24 мая, Москва." />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="assets/logo.jpg" />
-
-<!-- Favicon -->
-<link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
-
-<!-- Fonts: Cormorant Garamond (display serif), Marck Script (handwritten Cyrillic), Inter (body) -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Marck+Script&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Нина Тесейко — гайды по ИИ и консультации</title>
+<meta name="description" content="Практические гайды по работе с ИИ: как делегировать задачи и создать AI-персонажа с нуля. Консультации по ИИ-инструментам от Нины Тесейко.">
+<meta name="keywords" content="гайд делегирование ИИ, AI персонаж с нуля, искусственный интеллект для бизнеса, нейросети для фрилансеров, Нина Тесейко, как работать с ИИ, ChatGPT промпты, AI инфлюенсер">
+<meta name="author" content="Нина Тесейко">
+<meta property="og:title" content="Нина Тесейко — гайды по ИИ">
+<meta property="og:description" content="Практические гайды: делегирование ИИ и создание AI-персонажа. Без лишней теории — только то, что работает.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nn-chanelle.github.io">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Нина Тесейко — гайды по ИИ">
+<meta name="twitter:description" content="Практические гайды по работе с ИИ и консультации.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Golos+Text:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #faf4e8;
-    --cream-deep: #f3e9d2;
-    --paper: #fffbf3;
-    --bordeaux: #6b1e2a;
-    --bordeaux-deep: #4a131c;
-    --gold: #b89766;
-    --gold-light: #d8b87a;
-    --ink: #2a1a16;
-    --ink-soft: #5a4640;
-    --line: rgba(184, 151, 102, 0.35);
-  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #070A0D;
+    --surface: #0D1117;
+    --surface2: #131920;
+    --text: #EEF4F0;
+    --muted: rgba(200,220,210,0.45);
+    --faint: rgba(200,220,210,0.1);
+    --gold: #00E87A;
+    --gold-dim: rgba(0,232,122,0.08);
+    --gold-line: rgba(0,232,122,0.28);
+  }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--cream);
-    color: var(--ink);
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Golos Text', sans-serif;
+    font-size: 17px;
     line-height: 1.65;
-    font-weight: 300;
-    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
-  /* — Decorative paper texture — */
-  body::before {
-    content: '';
+
+  #matrix-canvas {
     position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(ellipse at 20% 10%, rgba(216, 184, 122, 0.08), transparent 60%),
-      radial-gradient(ellipse at 80% 90%, rgba(107, 30, 42, 0.05), transparent 55%);
-    pointer-events: none;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     z-index: 0;
+    pointer-events: none;
+    opacity: 0.13;
   }
 
-  /* — Container — */
-  .container {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 0 28px;
+  nav, .hero, section, footer, .section-label, .section-divider {
     position: relative;
     z-index: 1;
   }
 
-  /* — Top bar with logo — */
-  .topbar {
-    padding: 28px 0 16px;
-    text-align: center;
-  }
-  .topbar img {
-    max-width: 220px;
-    width: 50%;
-    height: auto;
-    opacity: 0.95;
-  }
-
-  /* — Hero — */
-  .hero {
-    text-align: center;
-    padding: 36px 0 60px;
-    position: relative;
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    background-size: 256px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
   }
 
-  .eyebrow {
-    font-family: 'Marck Script', cursive;
-    font-size: clamp(22px, 2.6vw, 30px);
-    color: var(--bordeaux);
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-  }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: clamp(44px, 6.8vw, 86px);
-    line-height: 1;
-    letter-spacing: -0.5px;
-    color: var(--ink);
-    margin: 8px 0 6px;
-  }
-  .hero h1 em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--bordeaux);
-  }
-
-  .hero .with-name {
-    font-family: 'Marck Script', cursive;
-    font-size: clamp(34px, 4.6vw, 58px);
-    color: var(--bordeaux-deep);
-    line-height: 1.05;
-    margin-top: 10px;
-  }
-
-  .hero .role {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(17px, 1.8vw, 22px);
-    color: var(--ink-soft);
-    margin-top: 16px;
-    letter-spacing: 0.3px;
-  }
-
-  /* — Gold ornamental divider — */
-  .ornament {
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 18px;
-    margin: 32px auto;
-    color: var(--gold);
-  }
-  .ornament .line {
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .ornament .diamond {
-    width: 8px; height: 8px;
-    background: var(--gold);
-    transform: rotate(45deg);
-  }
-  .ornament .star {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--gold);
-    letter-spacing: 8px;
-    line-height: 1;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(8,10,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--faint);
   }
 
-  /* — Portrait section — */
-  .portrait-section {
-    padding: 20px 0 72px;
-    text-align: center;
-    position: relative;
+  .nav-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
   }
 
-  .portrait-frame {
-    display: inline-block;
-    position: relative;
-    padding: 18px;
-    background:
-      linear-gradient(135deg, var(--paper) 0%, var(--cream-deep) 100%);
-    border: 1px solid var(--line);
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.6) inset,
-      0 30px 60px -20px rgba(74, 19, 28, 0.18),
-      0 12px 24px -12px rgba(74, 19, 28, 0.12);
-    border-radius: 4px;
-  }
-  .portrait-frame::before {
-    content: '';
-    position: absolute;
-    inset: 6px;
-    border: 1px solid var(--gold);
-    opacity: 0.4;
+  .nav-cta {
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--gold-line);
+    padding: 0.55rem 1.4rem;
     border-radius: 2px;
+    transition: all 0.25s;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold);
+    box-shadow: 0 0 16px rgba(0,232,122,0.2);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 45% at 75% 15%, rgba(0,232,122,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 35% 35% at 10% 85%, rgba(0,232,122,0.05) 0%, transparent 50%);
     pointer-events: none;
   }
-  .portrait-frame .photo {
-    width: 100%;
-    max-width: 500px;
-    aspect-ratio: 1 / 1;
-    background:
-      linear-gradient(180deg, #efe3cd 0%, #d9c8a8 100%);
-    border-radius: 2px;
+
+  .hero-index {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(3rem, 8vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+    display: block;
+    text-shadow: 0 0 40px rgba(0,232,122,0.35), 0 0 80px rgba(0,232,122,0.15);
+  }
+
+  .hero-sub {
+    margin-top: 2.5rem;
+    max-width: 520px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
+    gap: 0.8rem;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
   }
-  .portrait-frame .photo img {
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold-line);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--gold);
+    animation: scanLine 2s 1.2s infinite;
+  }
+
+  /* DIVIDER */
+  .section-divider {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 1px;
+    background: var(--faint);
+    margin: 0 3rem;
+    width: calc(100% - 6rem);
+  }
+
+  /* SECTION HEADER */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 4rem 3rem 3rem;
+  }
+
+  .section-label span {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--faint);
+  }
+
+  /* PRODUCTS */
+  .products {
+    padding: 0 3rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5px;
+    background: var(--faint);
+  }
+
+  .product-card {
+    background: var(--bg);
+    padding: 3rem 2.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s;
+  }
+
+  .product-card:hover {
+    background: var(--surface);
+  }
+
+  .product-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
     display: block;
   }
 
-  .portrait-caption {
-    margin-top: 22px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: var(--ink-soft);
-    letter-spacing: 0.3px;
-  }
-
-  /* — Section heading — */
-  .section-eyebrow {
-    font-family: 'Marck Script', cursive;
-    font-size: 28px;
-    color: var(--bordeaux);
-    margin-bottom: 4px;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: clamp(34px, 4.4vw, 52px);
-    color: var(--ink);
-    line-height: 1.1;
-    margin-bottom: 18px;
-    letter-spacing: -0.3px;
-  }
-
-  /* — About event — */
-  .about {
-    padding: 60px 0;
-    text-align: center;
-  }
-  .about p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(18px, 1.9vw, 22px);
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 720px;
-    margin: 0 auto 14px;
-    font-weight: 400;
-  }
-
-  /* — What awaits — list — */
-  .programme {
-    margin: 50px 0 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 28px;
-    max-width: 880px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .programme .item {
-    text-align: center;
-    padding: 28px 16px 24px;
-    border-top: 1px solid var(--line);
-    position: relative;
-  }
-  .programme .item::before {
-    content: '◆';
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
+  .product-tag {
+    display: inline-block;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--gold-line);
     color: var(--gold);
-    background: var(--cream);
-    font-size: 12px;
-    padding: 0 8px;
-  }
-  .programme .item .label {
-    font-family: 'Marck Script', cursive;
-    font-size: 26px;
-    color: var(--bordeaux);
-    margin-bottom: 6px;
-    line-height: 1;
-  }
-  .programme .item .desc {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: var(--ink-soft);
-    font-weight: 300;
-    letter-spacing: 0.2px;
+    border-radius: 1px;
+    margin-bottom: 1.5rem;
   }
 
-  /* — Details card — */
-  .details {
-    padding: 80px 0;
+  .product-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
   }
-  .details-card {
-    max-width: 760px;
-    margin: 0 auto;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 52px 48px;
-    box-shadow:
-      0 1px 0 rgba(255,255,255,0.6) inset,
-      0 24px 48px -20px rgba(74, 19, 28, 0.15);
+
+  .product-desc {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .product-list {
+    margin: 1.5rem 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .product-list li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
     position: relative;
   }
-  .details-card::after {
-    content: '';
+
+  .product-list li::before {
+    content: '—';
     position: absolute;
-    inset: 12px;
-    border: 1px solid var(--gold);
-    opacity: 0.3;
-    border-radius: 3px;
-    pointer-events: none;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
   }
-  .details-grid {
+
+  .product-price {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price-val {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .price-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .product-btn {
+    display: block;
+    margin-top: 1.5rem;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--gold-line);
+    color: var(--text);
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+
+  .product-btn:hover {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold);
+    box-shadow: 0 0 20px rgba(0,232,122,0.15);
+  }
+
+  .product-btn.primary {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #070A0D;
+    font-weight: 700;
+    box-shadow: 0 0 24px rgba(0,232,122,0.4), 0 0 60px rgba(0,232,122,0.15);
+  }
+
+  .product-btn.primary:hover {
+    background: #1FFFA0;
+    border-color: #1FFFA0;
+    color: #070A0D;
+    box-shadow: 0 0 32px rgba(0,232,122,0.55), 0 0 80px rgba(0,232,122,0.2);
+  }
+
+  /* FOR WHOM */
+  .audience {
+    padding: 0 3rem 6rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 36px 48px;
-    margin-top: 36px;
-  }
-  .details-grid .item .key {
-    font-family: 'Marck Script', cursive;
-    font-size: 22px;
-    color: var(--bordeaux);
-    margin-bottom: 4px;
-  }
-  .details-grid .item .val {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--ink);
-    font-weight: 500;
-    line-height: 1.3;
-  }
-  .details-grid .item .sub {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--ink-soft);
-    margin-top: 4px;
-    font-weight: 300;
+    gap: 5rem;
+    align-items: start;
   }
 
-  .price-line {
-    margin-top: 44px;
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-    text-align: center;
-  }
-  .price-line .price-tag {
-    font-family: 'Marck Script', cursive;
-    font-size: 24px;
-    color: var(--bordeaux);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .price-line .price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(46px, 6vw, 68px);
-    font-weight: 500;
-    color: var(--bordeaux-deep);
-    line-height: 1;
-  }
-  .price-line .price-note {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--ink-soft);
-    font-size: 16px;
-    margin-top: 8px;
-  }
-  .price-line .price-after {
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 14px;
-    opacity: 0.75;
-  }
-
-  /* — CTA — */
-  .cta-wrap {
-    text-align: center;
-    padding: 24px 0 90px;
-  }
-  .cta {
-    display: inline-block;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 21px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--cream);
-    background: var(--bordeaux);
-    padding: 22px 56px;
-    text-decoration: none;
-    border-radius: 2px;
-    border: 1px solid var(--bordeaux-deep);
-    box-shadow: 0 16px 32px -12px rgba(74,19,28,0.45);
-    transition: all 0.25s ease;
-    position: relative;
-  }
-  .cta:hover {
-    background: var(--bordeaux-deep);
-    transform: translateY(-2px);
-    box-shadow: 0 22px 40px -14px rgba(74,19,28,0.55);
-  }
-  .cta-note {
-    margin-top: 20px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--ink-soft);
-    font-size: 15px;
-  }
-  .cta-finep {
-    margin-top: 14px;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    color: var(--ink-soft);
-    opacity: 0.65;
-    letter-spacing: 0.3px;
-    font-weight: 300;
-  }
-
-  /* — Early bird banner — */
-  .early-bird {
-    padding: 10px 0 30px;
-    text-align: center;
-  }
-  .early-bird-inner {
-    display: inline-block;
-    border: 1px solid var(--bordeaux);
-    border-radius: 4px;
-    padding: 22px 56px;
-    background: var(--paper);
-    position: relative;
-    box-shadow: 0 12px 28px -16px rgba(74,19,28,0.25);
-  }
-  .early-bird-inner::before,
-  .early-bird-inner::after {
-    content: '◆';
-    color: var(--gold);
-    position: absolute;
-    font-size: 9px;
-    top: 50%;
-    transform: translateY(-50%);
-    line-height: 1;
-  }
-  .early-bird-inner::before { left: 16px; }
-  .early-bird-inner::after { right: 16px; }
-  .eb-pulse {
-    font-family: 'Marck Script', cursive;
-    font-size: 24px;
-    color: var(--bordeaux);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .eb-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(20px, 2.4vw, 26px);
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  .audience-text h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700;
     line-height: 1.1;
-  }
-  .eb-detail {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 17px;
-    color: var(--ink-soft);
-    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
   }
 
-  /* — About Voci — */
-  .voci-block {
-    background: var(--cream-deep);
-    padding: 70px 0;
-    margin: 30px 0 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .voci-block .container {
-    text-align: center;
-  }
-  .voci-quote {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(22px, 2.6vw, 30px);
-    line-height: 1.45;
-    color: var(--ink);
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  .voci-quote::before, .voci-quote::after {
-    color: var(--gold);
-    font-size: 1.4em;
+  .audience-text h2 em {
     font-style: normal;
-    line-height: 0;
-    position: relative;
-    top: 0.15em;
-  }
-  .voci-quote::before { content: '«'; margin-right: 6px; }
-  .voci-quote::after { content: '»'; margin-left: 6px; }
-
-  .voci-sig {
-    font-family: 'Marck Script', cursive;
-    font-size: 32px;
-    color: var(--bordeaux);
-    margin-top: 26px;
+    color: var(--gold);
+    text-shadow: 0 0 30px rgba(0,232,122,0.3);
   }
 
-  /* — Footer — */
-  footer {
-    padding: 50px 0 60px;
-    text-align: center;
+  .audience-text p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.75;
   }
-  footer .socials {
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--faint);
+  }
+
+  .audience-item {
+    background: var(--bg);
+    padding: 1.8rem 1.5rem;
+    transition: background 0.25s;
+  }
+
+  .audience-item:hover {
+    background: var(--surface);
+  }
+
+  .audience-item-icon {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .audience-item h4 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  .audience-item p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* AUTHOR */
+  .author {
+    padding: 0 3rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .author-quote {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--muted);
+  }
+
+  .author-quote strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .author-info {
+    border-left: 1px solid var(--gold-line);
+    padding-left: 2.5rem;
+  }
+
+  .author-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem;
+  }
+
+  .author-bio {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .author-tags {
     display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .author-tag {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--faint);
+    color: var(--muted);
+    border-radius: 1px;
+    letter-spacing: 0.05em;
+  }
+
+
+  .author-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid var(--gold-line);
+    box-shadow: 0 0 30px rgba(0,232,122,0.2);
+    flex-shrink: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  /* FINAL CTA */
+  .cta-section {
+    padding: 6rem 3rem 8rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,232,122,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-section h2 em {
+    font-style: normal;
+    color: var(--gold);
+    display: block;
+    text-shadow: 0 0 50px rgba(0,232,122,0.45), 0 0 100px rgba(0,232,122,0.18);
+  }
+
+  .cta-section p {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 460px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
     justify-content: center;
-    gap: 30px;
-    margin: 18px 0;
     flex-wrap: wrap;
   }
-  footer .socials a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    color: var(--ink-soft);
+
+  .btn-lg {
+    display: inline-block;
+    padding: 1.1rem 2.5rem;
+    font-family: 'Golos Text', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 2px;
-    letter-spacing: 0.5px;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: #070A0D;
+    border: 1px solid var(--gold);
+    font-weight: 700;
+    box-shadow: 0 0 28px rgba(0,232,122,0.45), 0 0 60px rgba(0,232,122,0.15);
+  }
+
+  .btn-gold:hover {
+    background: #1FFFA0;
+    box-shadow: 0 0 40px rgba(0,232,122,0.6), 0 0 80px rgba(0,232,122,0.2);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--gold-line);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-dim);
+    box-shadow: 0 0 16px rgba(0,232,122,0.12);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--faint);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
     transition: color 0.2s;
-  }
-  footer .socials a:hover {
-    color: var(--bordeaux);
-    border-color: var(--bordeaux);
-  }
-  footer .legal {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    color: var(--ink-soft);
-    opacity: 0.7;
-    margin-top: 18px;
-    font-weight: 300;
+    letter-spacing: 0.03em;
   }
 
-  /* — Mobile — */
-  @media (max-width: 640px) {
-    .details-card { padding: 40px 26px; }
-    .details-grid { grid-template-columns: 1fr; gap: 28px; }
-    .cta { padding: 18px 40px; font-size: 18px; letter-spacing: 1.5px; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* — Reveal on scroll (subtle) — */
-  .fade-in {
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scanLine {
+    from { left: -100%; }
+    to { left: 100%; }
+  }
+
+  /* scroll reveal */
+  .reveal {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .fade-in.visible {
+
+  .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 0 1.5rem 5rem; }
+    .products { grid-template-columns: 1fr; padding: 0; gap: 1px; }
+    .audience { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem 4rem; }
+    .author { grid-template-columns: 1fr; gap: 2.5rem; padding: 0 1.5rem 4rem; }
+    .cta-section { padding: 4rem 1.5rem 5rem; }
+    .section-label { padding: 3rem 1.5rem 2rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    .audience-grid { grid-template-columns: 1fr; }
+    .section-divider { margin: 0 1.5rem; width: calc(100% - 3rem); }
   }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="container">
-    <img src="assets/logo.jpg" alt="Voci dell'Opera" />
-  </div>
-</header>
+<canvas id="matrix-canvas"></canvas>
 
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">ИИ на вас&nbsp;работает</a>
+  <a class="nav-cta" href="https://t.me/nn_chnl" target="_blank">Записаться</a>
+</nav>
+
+<!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="eyebrow">журнал Voci dell'Opera представляет</div>
-    <h1>Творческая <em>встреча</em></h1>
-    <div class="with-name">с Екатериной Первушиной</div>
-    <div class="role">прима-балерина театра «Кремлёвский балет»</div>
-
-    <div class="ornament">
-      <span class="line"></span>
-      <span class="diamond"></span>
-      <span class="line"></span>
-    </div>
-
-    <div class="portrait-section">
-      <div class="portrait-frame">
-        <div class="photo">
-          <img src="assets/katya.jpeg" alt="Екатерина Первушина" />
-        </div>
-      </div>
-    </div>
+  <div class="hero-bg"></div>
+  <p class="hero-index">Практические знания · 2025–2026</p>
+  <h1 class="hero-title">
+    ИИ должен<br>работать
+    <em>на вас</em>
+  </h1>
+  <p class="hero-sub">
+    Два гайда и консультация — всё, что нужно чтобы перестать путаться
+    и начать делегировать ИИ задачи, которые он умеет делать лучше вас.
+  </p>
+  <div class="hero-scroll">
+    <span>Листать</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<section class="about fade-in">
-  <div class="container">
-    <h2 class="section-title">Камерный разговор и&nbsp;бокал игристого</h2>
-    <p>
-      Уютный вечер для небольшой аудитории — без&nbsp;сцены, на&nbsp;расстоянии вытянутой&nbsp;руки.
-      Только живой разговор, искренние истории и&nbsp;возможность задать вопросы прима-балерине лично.
+<!-- PRODUCTS -->
+<div class="section-divider"></div>
+<div class="section-label reveal"><span>Продукты</span></div>
+
+<section class="products" id="products">
+
+  <!-- Guide 1 -->
+  <div class="product-card reveal">
+    <span class="product-num">01 / 03</span>
+    <span class="product-tag">Гайд</span>
+    <h3 class="product-title">Как общаться<br>и делегировать ИИ</h3>
+    <p class="product-desc">
+      Практический гайд для тех, кто хочет чтобы ИИ работал на них, а не наоборот. 
+      Никакой теории — только рабочие схемы.
     </p>
-    <p>
-      Поговорим о&nbsp;том, как изменилась жизнь Кати после рождения ребёнка,
-      о&nbsp;возвращении в&nbsp;театр после декретного отпуска,
-      о&nbsp;майской премьере «Тщетной предосторожности» и&nbsp;творческих планах артистки.
+    <ul class="product-list">
+      <li>Виды ИИ: кто что умеет и зачем</li>
+      <li>5 главных ошибок — и как их избежать</li>
+      <li>Как правильно распределять задачи</li>
+      <li>3 компетенции эффективного делегирования</li>
+      <li>Шаблоны промптов для старта</li>
+      <li>Первый реальный проект с ИИ</li>
+    </ul>
+    <div class="product-price">
+      <span class="price-val">1 490 ₽</span>
+      <span class="price-note">PDF · практический формат</span>
+    </div>
+    <a class="product-btn" href="https://web.tribute.tg/p/vns" target="_blank">Получить гайд</a>
+  </div>
+
+  <!-- Guide 2 -->
+  <div class="product-card reveal" style="transition-delay:0.1s">
+    <span class="product-num">02 / 03</span>
+    <span class="product-tag">Гайд</span>
+    <h3 class="product-title">AI-персонаж<br>с нуля</h3>
+    <p class="product-desc">
+      От идеи до живого аккаунта с монетизацией. Написан на основе реального 
+      опыта — через ошибки, баны и перезапуски.
     </p>
+    <ul class="product-list">
+      <li>Концепция и легенда персонажа</li>
+      <li>Инструменты: Midjourney, Flux, Kling AI</li>
+      <li>Контент-стратегия: форматы, которые работают</li>
+      <li>Instagram, TikTok, Telegram — что и как</li>
+      <li>Монетизация: закрытый канал, UGC, бренды</li>
+      <li>Первые 9 постов: пошаговая практика</li>
+    </ul>
+    <div class="product-price">
+      <span class="price-val">3 990 ₽</span>
+      <span class="price-note">PDF · практический формат</span>
+    </div>
+    <a class="product-btn" href="https://web.tribute.tg/p/voZ" target="_blank">Получить гайд</a>
+  </div>
 
-    <div class="programme">
-      <div class="item">
-        <div class="label">Фуршет</div>
-        <div class="desc">приветственный бокал игристого и&nbsp;закуски</div>
-      </div>
-      <div class="item">
-        <div class="label">Беседа</div>
-        <div class="desc">живой разговор с&nbsp;Екатериной</div>
-      </div>
-      <div class="item">
-        <div class="label">Нетворкинг</div>
-        <div class="desc">встреча с&nbsp;ценителями оперы и&nbsp;балета</div>
-      </div>
-      <div class="item">
-        <div class="label">Фотосессия</div>
-        <div class="desc">кадры с&nbsp;артисткой на&nbsp;память</div>
-      </div>
+  <!-- Consultation -->
+  <div class="product-card reveal" id="consult" style="transition-delay:0.2s">
+    <span class="product-num">03 / 03</span>
+    <span class="product-tag">Консультация</span>
+    <h3 class="product-title">Разберём<br>ваш случай</h3>
+    <p class="product-desc">
+      Один на один. Вы приходите с задачей — уходите с картой: 
+      что делегировать ИИ, какими инструментами, в каком порядке.
+    </p>
+    <ul class="product-list">
+      <li>Аудит вашего воркфлоу и задач</li>
+      <li>Подбор конкретных инструментов под цели</li>
+      <li>Готовые промпты для ваших задач</li>
+      <li>Ответы на вопросы по гайдам</li>
+      <li>Запись встречи остаётся у вас</li>
+    </ul>
+    <div class="product-price">
+      <span class="price-val">от 6 990 ₽</span>
+      <span class="price-note">60 мин, онлайн</span>
+    </div>
+    <!-- ЗАМЕНИТЕ # на ссылку Calendly / Telegram -->
+    <a class="product-btn primary" href="https://t.me/nn_chnl" target="_blank">Записаться</a>
+  </div>
+
+</section>
+
+<!-- FOR WHOM -->
+<div class="section-divider"></div>
+<div class="section-label reveal"><span>Для кого</span></div>
+
+<section class="audience">
+  <div class="audience-text reveal">
+    <h2>Если вы ещё<br>не работаете<br>с <em>ИИ</em> —<br>вы теряете время</h2>
+    <p style="margin-top:1.5rem">
+      Не нужно быть разработчиком или разбираться в технологиях.
+      Нужно знать базовые принципы — и ИИ станет вашим лучшим 
+      помощником в рутинных задачах.
+    </p>
+  </div>
+  <div class="audience-grid reveal" style="transition-delay:0.15s">
+    <div class="audience-item">
+      <span class="audience-item-icon">◈</span>
+      <h4>Фрилансеры</h4>
+      <p>Автоматизируйте рутину и берите больше проектов за то же время</p>
+    </div>
+    <div class="audience-item">
+      <span class="audience-item-icon">◈</span>
+      <h4>Предприниматели</h4>
+      <p>Делегируйте ИИ задачи и фокусируйтесь на стратегии</p>
+    </div>
+    <div class="audience-item">
+      <span class="audience-item-icon">◈</span>
+      <h4>Маркетологи</h4>
+      <p>Контент, аналитика, брейншторм — в разы быстрее</p>
+    </div>
+    <div class="audience-item">
+      <span class="audience-item-icon">◈</span>
+      <h4>Продюсеры</h4>
+      <p>Создавайте AI-персонажей и монетизируйте с первого месяца</p>
     </div>
   </div>
 </section>
 
-<section class="details fade-in">
-  <div class="container">
-    <div class="details-card">
-      <div style="text-align:center;">
-        <div class="section-eyebrow">детали встречи</div>
-        <h2 class="section-title">24 мая, суббота</h2>
-      </div>
+<!-- AUTHOR -->
+<div class="section-divider"></div>
+<div class="section-label reveal"><span>Автор</span></div>
 
-      <div class="ornament">
-        <span class="line"></span>
-        <span class="star">·</span>
-        <span class="line"></span>
-      </div>
-
-      <div class="details-grid">
-        <div class="item">
-          <div class="key">когда</div>
-          <div class="val">24 мая, 16:00</div>
-          <div class="sub">встреча на&nbsp;фуршет с&nbsp;15:30</div>
-        </div>
-        <div class="item">
-          <div class="key">где</div>
-          <div class="val">Brooms</div>
-          <div class="sub">проспект Мира, 116 · м.&nbsp;Алексеевская</div>
-        </div>
-        <div class="item">
-          <div class="key">сколько мест</div>
-          <div class="val">всего 15</div>
-          <div class="sub">камерный формат</div>
-        </div>
-        <div class="item">
-          <div class="key">дресс-код</div>
-          <div class="val">smart casual / коктейль</div>
-          <div class="sub">если хочется сиять&nbsp;— выбирайте коктейльное</div>
-        </div>
-      </div>
-
-      <div class="price-line">
-        <div class="price-tag">early&nbsp;bird · первые 5 билетов</div>
-        <div class="price">3&nbsp;000&nbsp;₽</div>
-        <div class="price-note">фуршет включён</div>
-        <div class="price-after">далее&nbsp;— 3&nbsp;800&nbsp;₽</div>
-      </div>
+<section class="author">
+  <div class="author-quote reveal">
+    Я создала эти гайды потому что <strong>видела, как люди теряются в ИИ-инструментах</strong> —
+    не потому что они сложные, а потому что никто не объясняет базовых правил работы с ними.
+  </div>
+  <div class="author-info reveal" style="transition-delay:0.15s">
+    
+    <img class="author-photo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAFoAWgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDzS6nES7iccdDXJ6vqoiJSMfvD1qx4l1URDy1x5nbnpXHvIzuWY5J6muurW6I+1zzN3Gbo0nr+RK7tIxZySx5JNNzTN1KDXKfJXb1Y/NFNpQady7jga2vDEPm3pfGQorDrsfCluEsWlP3nNXDVnrZNR9tio9lqaEsLeYCCAtc54jbF2sf90ZrrDgDmuG1SXzb6Vs8A4FVM93PpKnQUVvJlUmtbw5L+/eItt3Csc5qS1mMFwkg7HmoPlsNW9lVjM7rHl/KckAcc9K5jxFb+XMJB0Yc10PmLJDHKvzbqo6zF59s4xyvIpy7n0WY0/bUG101RyWaUNSMpBIpB1pXPlUyXNKCMc0xaXvSLHVc0++ktWAySnpVMUdqCoycXdHVpIk8aTRsOtEiRyhg2Sp61zdtcvA3yk7T1FbENx5yblBwf0qGd8K6qKzKd7pTiUmD7h7Gqw02bjOOa3RNuC5ALDjNKJAASFGR6UuZoylQpt3MT+ypB1ZaUaaeMt19K2w3fcnPvTlO8AfLweeKlzZP1eBlppUQIDsSTViLTbdPmIJOehqyynnaxz7AHH4VF5zAncM4/A1DmyvZwj0L8MUaxfu12/hQ8gUHtiqy3OU+U/WoL65EVszt6VmldluaSMzWNRGwrF94nn2rOtoFnj3yS4JqrcsWyT1JqOOaRBhXIHpXSo8uh5NWs5SuzSNrAv/LemNBB0EpP4VFHcy46A/hT1nmkOFVfypkRaZJHaQHq7flS2Nh9o1AKufKU8k1JZWNzdvyxCjqegroLaBLaLagyT1J71lKfKdNOkpa2sWhsVFVTwOOKztcuxHbGNThn4qeWVYxuYgKO9c7cXQu7sgj5c/LWcY31Omc0lYoyqFGdwNbWjcWg471mXyohG0CtPSTizXHqa2OWGk2X5vuccDFRA4j9aklI2DvxVcsNnBqkaSZlv/rHI9adGcLTCfnf60+P7taHMnoSDpRSZooGUb53e5dpGJYnkmoAau65F5V/IuMfNms8VJNaLhUlGW6bJRTgaiBp4oEh9ApBSgUFIkiQyOqDqxxXo2n2ptrKJPRea4zw5am51FDj5U+Y128020cDjpW9JdT7HhygoU515ddEU9RnENpNLnGBXCFizEnqTmui8T3OIUhXgtya5qonuebn2J9rXVNbR/NjiaYTQaTvUnhHTaBehrUxOTuU8VdmkJB6YHHFcvplx9nulY/dPBraluI1UlTlT3qk9D6LB4pToKMnsZGoxCOY7fumqgU847Vo3ksLx8Nk/SqBOT/WovbQ8etBRm7bAvHY/lTsnq1MA9x/KnDOKLkWF3cdqQEUdeq/lRtX3qWwHZXPX9Ks28zRgBDiqpXg9cUBiBwAam4KXKXluXBI3DB/Ghbp1PDZHvxVAyZ64zTd570h+3NX7UxGCqtj0qaK7ZF4iB/EGsVTk8Gnhyh6kGk0Uq5rrfqc5jI9jVlZFmwUwoI6ZrAMuT1OPpU9vcmMkE5Qn8qhxGq19zSk+XmPgiszVbgyoq54z0q95wK5HXvWTqBzNwAB6VUFqZ1J3WhRk+7UIqaXpUI61qzgnuaGnJ5rBTnBres7KADcefY1gaVIy3CL2zXSRYUN71lUk1odFG1i+m1EwMfhUU7hVyThQOajV/lxmmzEMpXg5rCx1cxz+p6gZyY4j+7Hf1rPjco4YAHFbF7pgOWgGD1xWM0UgYqQQa6Y2tocdSUr6kk82852gVr6UubJD7msJ43X7wNbumg/YEwe9MKUrsvTH5Ovaqx4TOKmlJx+FM8wCAqwyaaNWzKP3m+tPj+7UZ6t9akj+6K0ME9B4ooooHcseLYSl2jHGWXtWCBXXeLYt0ETkcg4rkgKc1aR35vS9njJ266igUooFKKg89Dlp4pgq3YQfabuOPsTyaq1zanBzkox3Z1XhW3EFk87YDv0+lXppd7FccdasWkccQEXGwDiqPiGdbS3dlwGbgV1pcsfQ/QFTWDwiV9IrU5TWLg3F85Byq/KKo0pJJJPU00muRu+p8DVqOrNzluxTSewpKUd6RmKKv2ziSPaeMd6orUsZKHd+lF7HRRlyO5deLA5OB+pqlIu1iAakeVm5PFRE89KTZtUlGWyE5I5FOAHcEUzdz2o+Zh149qkyHkqRgnP4YqNiMcGl2nuTQQeOaREmxuT7ikLfnS4GeaaR2pGDuIWwaQyewNL8o45H4UmcdDmmSJv5B705Jez8j9RTDz1zSEdwaBXaJ8Dd14NSgYzg1VifPBqzEwycmkXFk0cnUVDcZdixNPGOvrxUczBePxoW5V9CrKODmoMelWXUkcZpqwM3YfnVmE1qNjYqQQcEVYW+uU6SZFMEDBdxxinm1YpkEUNJ7kptbFiDV3VsSrkeorSt7qOdco+fb0rn/s5bkEYqIM0MnyNgiocEy1UlHc7CM5bOeBVLVLLzUMseAw5qLS7wTAK3Dd61cgjGajWLNbqaORlaV/lbPFbulj/AEFQetVNXt/KbzUB2nrirmkc2YJrXdGUPdkSMMEZOajlGBViQZI9qglI8smmjRsyj/F9alj+4Kgb+L61NH9wVoZJj/xopKKB3Oo8RW7zWrALyvSuHdSrEGvSrn52weRisC60qG4nJHGeta1oXd0fW5zls69RVaW+xygpcV0v9gpg4NH/AAj6kZDH6VlySPG/snFfynOCuj0KzZIxKV5Y8UyLRUE6q745rqILVIVUDPHFXCL3Z6uU5VU53UqK1hg3rlmHFcp4jvftF0Iwfkj4/Gui1q9W1s3OfmPAFcMzFmLE5J5NOpLobZ9iuSKw8XvqxKQ0tJWJ8qFOUcE+tNxU8YG36c0FwV2G3A5ppbJoJJGe5/ShVxwOnc1NzTyQDpilK9Oc0MccL+dKq98E+9ItLoJtb0pQjeoFO3DHNJvBPAyaCrJDiu3qRTSw7AflUkaOx4U0827+lTqxujOSvFFUsvp+lNJHbp7Crgtie1Na1PdeaNjGWGqdipke/wCVNOMZBq99nA+91+tKtoW7celLmRm6MjOIOOP5UzDelbselSMAxAAqX+ynKggdaXOgeHn2Oe2sOcVIhwMZ+ta8+nMFzsAArPkgKHHAPvVJpkcjiIrY+v8AKkOMkjk+tM2kfezS5PY5/GgGxGDNSRkoRwTTvm6ZpRx1z0pkNDxL5ihWU5FSrKAhUIahRgGG3gipfOAk3kfLVJktFVmZAQF4NU3BB+brVuWQBm2kkHoKrSuH6CgzY+2kMTB16g101ncCVFYdxXLICRxWtosmAyt25qZK6Ki2jbliWWMqwyDUawi2j2rnHalDnPsaWRsopOeKhGraIznvUE3ER55qVj3PSoLk5XNbIhsyWPX61Mhwq1Ax61Kv3RVkJj880U2igLneybVUkHk1UKktu7CqtheG+tkYdf4q0iFUY7YrovzH6TGpHEJTjsRJIOc8AVGJsE46mobiQZO2oM5OelBhOu07IV2Z5QzE5B4rYhm/c5cnIHJrKtG3XAXAPNQ+Ir8QRGCFvnbrjtSvZXJhiI4anKvJmRrt8bu8IH3E4GKzM0UVzvXc+Nr1pV6jqT3YuaKQe9L3oMhyqCacp5JPTtTARz3qRVz8vbvUs0guwKuOTyad0HXpSnj60wnnnmkbWUR2O+KR329aVjtGTyxqFY2nmCKCaTYOTWkdx0QeZuBn0Fbmn6S7gFhitDSNIESBpACxrft7QsQBWkKfVn0mX5M7c9YyINLUYGMmr0ej5GCuB+ZroLSxG0Zq9HAFXgZpSajsevLD06atFHJSaLgZEYYVXbR2YfLbBT67q7Uwjn5aZ5K5OQK55TOKpSjLdHHw+HWJ3MwBPoKuR6KkfI5Pqea6VY8cZOPSlMQz0H5Vm2c8sLDojnf7PxwVOB7U77GNoG3ge1bzxYPtUJjx2qDlqUEjAmsVII28isLU9L4JVe1dwYMGqlzahwcimnY4atHQ8wuIGQkYI9jVN8jtzXc6vpYKlwOR6VyF9bmNjxxW8Xc8mrGxTWRh2qRZAevWoT8ud3SnIynirMYsnAVs44NNIKn+h6GkAIORzUg54P8A+ulc0aTRTnXAJXp/KoDVyUbG5+6Rjn0qo42sRVHNONmOjYqOKvaU5NyR7Vnr0q7pRxc/hQwTN8N04pQ24EHpUIJ205X65qEi7gT972qrO/7s1YJwWqpPxHz3rWJDZnMeDUqn5RUDVMv3RVEofRQOlFMZc8P3BCPFnjrWyb3MZTv61yenymKcEHrxW5F8xJPQ1pTelj6LL8XL2SgnsWfNJPBzT3c+X0qBV+YAVoFVEeX4C8mtD0qSlNPUprMltC8z/eHQVz1xM08zSP1NWdUu/tM5C8IvAAqjWEpXPDxuJ9o/Zx+Ffj5i01m2inU2QZU1BwMYXNHJA601O1XYlAXOMmklcVOLmyFBggHr1NWEGAc/jSKm05b6mnnke1I66cOVXZGzZPFCLtG4/hT1Xj+dITk57CkVbqxrDjnr3rpvDOmAL50i5Y8isTT7c3NxFH6nJrv7WERxBV4q6ULu572RYBVajrTWi2JYYuQAOtattb4K/rVa1j+YfWtOEbUycj6V0y0PspRsixEnU4FTBRjgGmxfKvBqVee/59q5pnLOIBOOnFQyxAfhVtAKZIuRkVyyOCpEohCTnJFSAAjk1JjDYOaM4781mzBogdcY9D7UhiBqbbkj604DipMZxuVTFjniqs0eCa1CBgd6rSgZPWpZxVYqxi3UYKHpmuZ1jTRKrMi/N3HrXY3EeQaybuLAB7VrF6HiYinZnl13D5UrKwxjjmqwBU8V1uv6cJA0kYwwrlXVo32tW8XdHmSjZk8bZHNTbcrnuP1qoh2nrxVyPOQPyps1i7kUwLxsR1HNUZuTn8K0JTscrjAqi/J+tOJlUIhV3Sv+Pnn0qn3q5pmTcY9qozNjd8pAoU5I9qY+RgUE4pJDHZyxPaq9weDmpQcmoLvpVITM9zUqngVC9TL0FUSSDpRSCimMpRkhhjrmuhtyfKUnuKzdKtTI3mOPlFa5Uk8Crpq2p7eX0ZRjzvqSwHa241T1a/AUxRNyeppt9cGBNoPJrHJLMSeponLojXF4xwj7KG/UUGlpBTqyPIQlEg+U07HNDDimVYhjAHWr0ONmT0qkgJbFW0ORgdBSi7GlBWY4/M3PSnBc89qQDP0HU04tlQo9f0qTrQyZuFC96b1wBSn52PpUkS5bPfrUsVuZm/4XtwZXlI4XgV10S9Kx/D9sYbNd3U81r71jUsxAAGSa66Ssj9ByuiqGHjfTqX4CqdcVZEmSFB5+tchd6rdOxW1hwvZiCSah+06my43SdOoNKck9hVsfC9oRb+R3aSDgA5qzGxyN3HbFeYvfXyMSzyq4PUE1pWXiW6hK+diTHIJ4P0P9DWLuzheZQbtJNHo8QycdaSRDg4xWDpvie2nQEnYeCQa6JJUlXKkHvXNJalKUamsWUmBz3pQrY5qeVe9LtHSs7EuBCVIpp6VbdQTkCoXUd8DFS0YVI6EJPXGarysMmnzOiNgsM+lU55EY4VwT9aho86rKw2bnmqM8eY6stJgdQRUErZXg1cdjyazUmYN7ECpGK4vVrcJIfUfqK768Hyk45rkNfQCVT61tTep5tVHOqMHnpVqM5ZGPY81E6Yb3qW3HBUnmtGZxGTtvYfj/ADqp3wetWJv9Z9aiYZfd6daaJlqQEEEiruk/8fB+lVX5J4qzpnFxx6UzOxqy9sHmmE0rHJpvfmmAhbmorlsinOcVDMeKaEym1TL2qFqmHaqEPBopBRTA6aG2WKJUUdKr38gtYi2RnsK0Lto4IDI55HrXIX9211MWP3R0FbTkoqx9dmFaGFhyrfoRTStLIWY5JpoptPFc58zdt3Y4U6kFKBTLQ5RnrQR19aUDinA5HvQaJECg5IXljVhQEGAcnpULvg4X8acpIHv/ACqCqbSZPnOFHQdaQnOcfShAccU4DGAp/Gg6dWgC4GM/U1d0yDz7qNPfJ+lUSclQOldH4Tg3yPKRwOBRGN3Y7svoqtiIwOoiURxADjAqJ7Z7ogMSIwfzqwRnjtVmIbRXaop6M/QVSU/dexZ07T4gowgOPWteKG2VSGjjb8Kx1uvJTIOKpS6iVcgMM+mcUVLJaDqxjBb2Nm806zuFP7tASK5bVNA6vanJ7jpWoL/MasGQjpjcQacLxXGHBGe+f61wPEJO0jx6mIw9T3KiOMSyntpG3AgHnmu68KXjmRopf7gPPrUMkSSLkqGX1qxpsaW0gKqMfWuhUlNXT0NqGWwh71N3R0UhVgPemDaVGKaVDtkH3xSDOcGuSrHkdhVYKJZAx34Fcl4u1r7FH5ULgSN+nNdHISM81yuraHHe3byvIcseRWSkjzsRKUoNU9zirrVb2eQt57ZJPQ96iEd3IMF5cnqdxrubPw9ZQEEqGIPet61srNAFESD8Kq66HjLK6lT3pSPMYZNTtZBtaXjsRnP4Vq2muq0gjuV8pzxk9Ca724s7d1I8tT+Fcpr2gQvFIyLh+3pUcybszjxOCnQV07kdw4ZCetcrr65IHbrWraTSQ5tLr76/db1HpWVr7YdTjsauOjPLqO6OemfGw+tIsm3cR6VXkYk49Kej/IB+dbGCZIw45P8A+qo8Yzn6U5SSMHtSH8x3oAjK8nHSrOngCU59KgOMkrU+n480n2pkMvDI+lJTutIeKokjk61DL0qZuaZKn7rNNCKLVMKhbtU4pgKKKBRTES6zqLXcpVT+7H61miminCpbvqdNWtOvNzm9WOp4pgqQUCQ8UopBTqZogPSnHpimjrQzgUikxijnP61NEoPJ6CodwJ5qRZCv+FQXBpPUtAfJljhajY5HAwBTU3zMM9BT5sIuKbOq91foNU8k+owK7jwvB5diCRy3NcVZIZWz2zgV6JpUfl2kY74rSktbn0HDlLmquo+iLyjiobifyULcEgZxnmpgfSop0WRcOqt/vDNdEnpofZzT5fd3OV1XxLlCkCsrg1mPJqdzF9o2skQOQ5GK6e505HfeI0J7fKBipHike0e3dNyMOvoawjFyfvHy2JwOKryk61R+SWhy03220kjjla5DNhgcZXnn+lbdlfXCBUuVfy8Y37SP0qKbTbmWRJZTC7oNoLEgitKAbLBoGiDu3LMzd/YelZVqdPoeTSwtWNR3TsaOnXXOwnKN3rR5UkGsXSoJo3yY90fcE9q17lgJsI25cDB71phXy3R9hl8uRcl7o19OuAVIIHFWGlC5rBgm2SjrzU1xMQpPSubGXucec1HSXMgvNQUMcEGq/wBrwu4nisWcSGbcDkegqG5uthAd1DD+GsKcFsfO4HEc8mpM3luQ5JXP4ULeOp4Y/iK4641Wa335Rl2cncOAKof2/cEtIm1lPAxxitZU30NsTmNOn7sXqej2+qfMQxDY447VdmljuLckEEivNLTX43x5hKOvf1NdDZ6oskIzgMe3T8axlGXU8+WPVaLjITVIVZgwHzKa5jxEOE+hrp5pBJmuc8SYCJnOMHpWkN0ePV2ZyaqST607AB449RQGwemQe1PIyBgZrc5UNweo6imscjcOlSKex6981G6lGJH3T2oGyMnmrNhy5x2FVn68VPp/32z6UyGaa8DPemuKaDzzQ1UiQJ6U2Q5jYE9qaxqOQ/LTEVW6iphUJ6ipqYxwooFFMRning0yjFQXclBFPDCoKUUFKRYVxTt4quO9Ap3KU2Ts47VCo3N1o7UsfWkyk7skZdvfpQoJbk4FLKMH2p0YywY/lS6mqWti9HhYwBxVK6ky2B+FTSSbVx3NVGBwWPehs6K1TTlRp6L95R616LbjEaqPSuA0RMTRE9NwFegwj5RWtM+y4ahak7kyDpUyQlwT2pirxV22PY9q1knbQ+olF20K32UscFSKkFkSvANaSqpHApwBC4xXM6soHJKpKO5jyaZuGe9RrpwVsnJxW2W9iTUMg+XkY96n2jlucsm6jM0oIu/4VASWbNWZgS5NVpDtFbQVkdtDDqlG46Enzk+tWb/iNhwc9PaqcDfvVOe9WLw705HTvXJiXdo8TPJqVPQzJyRGcHjvislLJY7nzY5Ocg8jNbeNwINQmAE4xxWMXY+Mpy5Z3Mq+trppppYlVhLHtdQf15qjptpLFOEkQRxYId5UVsjOcDjr79a6mKDkDmrK2KHnbW3t2lY754WNX30zzzW7CNbljaAhR7YzUWnR3u9fkkZevH/167u70tJBnaKhtbBIQRtwKj2t0edVocsivaxuIwZQQx7E5rC8TdUHqCK6qZdorlPEvMiD1Win8RzVdInJEFWIOamjY49RSTLuPo1MBwc/nXQzkTsSn1FL1UHt0oU9+xpSNp4+6aRZA6YJx+VS2X3zSNjoePSnWY/etnjApoiSLZPvSselNpGqyBrGmSHINK1MbmmSQnqKmFQH7wqcUIY5aKF60UwKGKUClxRUF2DFLRRigYUtJilFAxcURnDUUg+8KC1oWJh8oPamqx69qWX7qVGoLtgUnubN66EkeXJJ6CnMNw+tPZQgVB1NSxREuuFyAak6IU29DqbDTvK0+JyPnADmukgOQKjskFxpauo4ZRj2p0HBArqjHlP0vCYeOHjHk2aReWrEZxVdOgqUV0RZ661RcSULjqT3q0p3jisxeTgGrlrweCayr01JXOevSTVy0EwKimjzgdhVgdODUEsgXJxn2riSszjjGzMu8xFngZ7VSCF+T0qzM3myFmz+NYWr64LCdEjhM397BxgV0Saj8R0V6tOhDnquyOxsNPTyssoLfSlu9PVo2xxVHSdbL2sbAOEZeAwwR9atXuspDatLJIqKP4mIGK5cRBbo8fH0ouLl0ZgGMxTNG3Y4qRUOeRUXmi6U3CPvVud3rV+3j8xQ1cbPiZUmp2sNjTH3h+NXYx8vFCRduoqZYx2BFQeph6ckrMgdcqQcVVkiwOlabR5HfNV7lQq01uZYmklqYF3wp5rj/Ebfvk9AK6+/PJArjtZ/eTSDqBxXRT3PDrLQwbgbSDVck9cfUValG9CM9qrIcHnt1rpOJofGR+dTAcYPQ9/Q1UxtfFWI2+XB6HrSKiNlU/jS2p+cnv0qQjHB5xQqgNx3pomRNnjpTWOaXPFI1UQNNMNPNRtVEkR+8KlFQn7wqYUIY9etFC9aKYFXFGKk8p/Q0eU3pU2N+V9iOipPKb0o8tvSiwcr7EYFLjipPLbHSgRse1FhqL7EYHFKq8j1qQRN3qWOMZG7rSsaQg2xrKX+Udu9OVBGv9amLqq4Xp61C2X+lJo63FR16hCN7lvwrofDccVyHRh8wOfrWBkJCWHHYV0Hg1ldiM/Op5FSlqenlFvrMIPqdvYxi3gESj5O1ROpSUjHFWoSCopl2AGWvQt7p+kSglBW6Do+lSA1HHUgpI1jsSIeauQvg+5qkhwalD8ZJOapu6HNXRo+YCPXNVZiArF+DTROFGB1qvIrSMcnH1rl9m73OT2dncqs2c9arfYoZHDFAWznJrRFtk4zVyzs14ZqcuXeRVScLe9qZM8RONqnB4zWX4j0x7mK3D8bDnn1rsZ4RvUKB8tVdQhEqDcOR1rjr1eaN13PBzeSr0G13MHTFMdgIdvznsK6CyiCwgVmxxFHyPu1o2rgHvXLdSd2eRRlGtU5p77FvYKClORvfmlJpNWOycVHYgJK9RgVn3s2VwMVbu5NqnmsW7lyTzRHc8fGT6GdfycMT2rl5I90Mzt97JNb19IMNk/KOTWDcSL9lmIP3q1R4k9Tnzx+FQzKFcEdCKkbkmmPzGR6cius4mhh5VfapE4ODTVAbPsKeeo+lAIlQE8enSlA5z2pIzkg96lYAHjoeaEEkR55pT70w8EU7uKsyA1G3epTUT96ZJF/EKmFQj74qYUIocvWilXrRTEWc0meaqfaz6Uv2o+lac6PV9vEtUlVvtJ9KBcH0pc6F7WJZ7UmcVX840eaaXMhe0RMSWPemMQtMErYOKa5J61nJi5+w+PMjZPA7CpZAAMCiBCqkvx6CmlsyAn8Kk2StHXdjLlv9XF6DJqzoX2r+04BYn98zbcHoR3z7YqkTvuGJ+lTwStaTxTR/eQ7sHv7UuupNKVqqqN2SfTc9GsZbg2j3kyB41cK2xyNgPRuR0zVuO8ivNpiYNjrireka9oT6THKsNxJaS2UsF3buo4uirbSnPIAwQeo5rkvC0uL64gELQxqgKBs5PPXmtU1GaVN3T7n3+FzG8qdNO8Zde7/AMvXyOsSpRUSdqlFdKPo4oWkJ5pwGaa4Ixmm0Nj42A60/f6nFVGlWMZc4FUrjUo04T5jUzqwgtWY1Jxj8TNkXccZ4A/Kmf2yisA2RXK3N5NKT8xA9BxVQO27rXBUrqWyPLrYiD0SO9F8Cnnbk8ofxFsVENRinBCurD1U5rhp5pGAXccZ9abHNJG4ZWII9K5ZK6sjysQuaDhBnckKSCOakjwtYGm6okzBGO2X+6Tw30rdifKjI/GsWjxYxlGTi90W43zx3FOkfAqoZArEg0jSll9KVzpeJurMr3kmeKyrmTgmrlw2c1k3knymtYo8fEVOZ3My8/fKyMSA3HHUn0rJv7ZbSA5fczKcj0rYgKMWd2GScAZ6Vj+IZY1jwSPNfjANaR3OCW1znm6fjS4yrUkpxtH508HEap3Y5NdRxkKf0qYAZWoV6fWpx29qCkLH98ip2+aMHuKjAxIKkQcketANERHNL0Ip7DFMPWrRgwNRPUxFRPTJIR98VNUQ++KlFCKHr1ooXrRTEUqcFY0+KMnk1YVKSVzrhTbKwRqfsYc1ZC1HcuEXFNxsaOmoq7KjuQcUqt0qFiScmpEPAHaoucyldlhMYB9KchAIOOajj5VqGb93xxzSZ0xdlcuNKAvPX0qHkkk9cZqKLLMB2qxj5ZPYUN3NlJz1ZBbjJJq2ITNhB/EQKr2w4FX4CAqMcjB7VJrh6akrM6QeHY7K6FkJpHDYLy7QArY/OrxgkttdjkLi4hli2rKhJKEdVbP860IdZstV0i0j03T4rfV4IfIu5fMJExB+WTb2OOCfWuS1C8TTt0fnl7hSC21s5IOcZ9K3qRpqKnBan1dOpQw1KE0rK9+nTp5/mvU7uPkVMKztJu0vLOKdDw65+hrRFbx1PsKNSNSKlHZjhRLg4xRSNyK1NWV5Ylk+8oI96pTachJKAKfatMDmnqmaxlRjPcynSjP4kc5LaOp6Zqo8ZQ4Zf0rqXiDnaR19qryaYWJ2EgDmuOph+V6Hn1sMlscvLEpXkYzVOSJ15RmA9q6l9IncYUqQPWoV0Of+PYF9OtYSg4o8fG0JKN4nJGWdDwN3oRwRXZeHdRlmh8u6jdWxw5HWnW+jpHuLKCfcVoRRCMbV6Vg5ngxqTpyvPVE0YLbj29aSTgEVOhCx4HrVeXvWaM61lqihO2FJrF1RytvIw+9jA+tbFz3rB1VmZoY0jZ9zjOONo9Sew962R51QguNIv7SKCedXgSZCyTFMRueeFx7iuLZ3nnLyMSx6k12fibxFew6Z/ZguJHhljC7GZXVQD1Ujp0xXFw4BJP0rpgktUefUleyHSEbxSE/OD6Cmt98mnKOefXFWQOjHOPSnp9/mmjAB9c05R+89qTGh8hxt59qnB5BqvKRtz3zU4IIH0oQ2Dn957UyQAGnE801xVowe4naoXqXtUT9KolkY+/Uo61Cv36mFCGPXrRQnWimBIkeKlWOpljp+Aoya3UT3Y0rFaXEaZNZM0hdyasX8+99o6CqYFc85XdkebiavNLljshKfGcNTD1p6ioOaO5YjXIOPWkYEjpySakiGI/qakUfKMUjtjC6Gxr5ae/entxA/vimsccnoKVzlR780jZWSshYhjB96tJyriq3RKsRHOfcUG9HR2Kl2zxziSJ2RiOoODUC5IznmrV2uY1PocGqydKZyVlao+x3XgmUnTiufuMciusjYECuL8BvxOvuDXYMpjO5fuH9K6qXw3P03Iqjlgqb8rFkUp5qJHyKeDW6Z7SdwIqzAoKjdzzwKrZzipYm52k/LTJkjRhjQc4FSBQc4FQwDkKSc1bCYHTmuCupJnm17plcwrnrgA0x1GTwKnYe1VpQUPSuCU2tGePiazirMqXGOg4qjM5HC8k9KszPz9ar4y2ayPnatTmdidThADTJDwadniq1xKAtJIylLQp3LcGucZZL66ucnbBt8pAM5Y9yKPEutx2ym3jO6VuHwfuj/ABqbwhqFzb3djNpN35V1ayLKshGdoHVsd8c8V0KPc86pNO6XQyNZ0a2j0aS++0OlzG6RrA68uOQT7YwOvXNc3EK6Tx3r76xq90WuVvHeYyS3eMG4b+99K5xTwa6tEtDhb5pXG9TT1xTF61JnAyBQAv8AF7CpEOGJNRp0OaAc4A79aQx8p4HoakgfIP1pHG5MHtSRJtpkORKR81I/NKDTW5JqiGHRahk6VN/DUEh4piI1+/Uo61Cv36mFNASJRSJ1opgWzdAVVub0spC1EzAcVXkolN7HfVxE7WTGHJNOxgcdaEXvSnkmsziSuIIye4qRUPtTFQ+lXbeFuPl/Ojc6KVLmeiDbtUA/lTscDccCnPhD8xyfSoWYtSZ1tKOgjNuJxwKkYdPYUxFywx0FSYy1IIIUj5TUiHBH0FMb7rfSl6Y+lBstGLcDMRHvVEdDirsx/dMe9UlOGwe9BhifiR0/gWTF/IueCtehqcrXl/hCXy9ZjH94EV6fH90V2Yd6WPv+FqnNg+Xs2RNGQcpx7ULKOh4NSmoJUBOa2atsfQyvHVEytmnq1UwGXpzTvNx1GKlSsJVO5rW9yqEH86vC8VhxXNmcetSw3W3AJ4rKsudHPXUZLQ6AThvpVO+n4KjHpVVLoHpUFxNuPPQV5laFmfO5hHSyGzsOKiV6gllyaj3s3AFYHzcotO5ZlnCgnNZ147mB5Oi4yPU1djt8jc3zH3qvqi4t5BjtQjGo9Dyi8cvcysSSSxNRIzKcoSD7HFPuf9e/+8aaor0FseF1HImalHHSkjwKdnNI2SSQ0DmnY4p20f8A1qQqSaBCDnvxTkHPvRwoxUYYq/FAmWB1x2p2eaYDkg0uQTimZslBpCeTQvXFNaqJBj8lQP0qRzxUT9KYhifeqUVEn3qmFNDHp3opE70UxEcow2KhPDc1NMxZt1QP3NQzpq7jmYZAFNzg0xetOzSZnFk6OR90c1Ks75wTgVVjODzVhlAUEUjppzlbRiSZzwcjtUoHAB603hQCeT2HpToxux6mkaxWo9RhSe1C/e4okOflHQURDPPvQbLewSHCn6U7qP8AgIps/cVIMbWz2AFMtfE0RucxMKpv1U1cY8Y+tVZCMCkc1dX1LmiyeTrNu/beP1r1mE5UV40rmOVGXsQRXrumyiW1icfxKDXRh3rY+w4QraVKXmmXDTH5FSU1hXWz7VkWKCoI5FOxSjpSSM7FWSAE8YFN8kgc1eRctVpbQMMmonaJz1IxjqzOt4vkz83506RMDp+daJh2DA+7VSVea8qvNuWh81j52bM5xzgVYtoc9qBHuY1et0wBXK3c8BJ1JagsXy1la2uIWHtW6y4WsPW/mQgelCHXpckTyS/XZdyr6MajRc1oarBnUJMVX2bfoOprvTuj5/2bu2NUUo64ximlu54X+dSx4JyR06Uy0r6C7MDPekOcYHQdTUyjJIPbvTJEI+7SLlTtqiFufrUZ/Wntkf1qNuMUzFk6HilQZPNQRnmp1NUjFkoFMkNOWo5DzTJEbpUbU401qoQ1PvGpKiT7xqShASIeDRSJ0NFMQyTpUDDrU79KixzUSOuaIgDmn4z9akVBw3Ud6WRF/h/WpEqbSuQEEGrYO1F3dcVCODk9RTslqCoe7ceDk5PSrSjZHkj5m7VXgTe/PQVJJJkk/lSOqm7LmY1zjgdT1qWDgVXHJyaswdaEVSd5DLg4J4p2/lh9DTJSC5FRFskmncJTtJjycnIqKUdKfH05o/hx6UjKXvIjIygzXpHhO4EulQHOSBg/hXnEeMkHpXb+Cpf9Fkh/utkfjV03aR73DNTkxdu6OxU5oNNjPyinV6C2P0laoYRRS0tMiw0NgitSBwUBrOSMM4HrWpBAqoMCufEPQ48W7IZIcjgZqnKhzzxWk0dUpxg815FXc+Xxq5iFEFWolAxxUMSFj6CrsaACskmzlw9B3uQzAkc8Vi6oOD6YrelHBrD1bhDTehGOilE851NM3cnQc8mqskG6PeOnpVq7bdcSt/ebipraNZEw2OtdClZHz9uZ2MOSFgcmkjOwjPrXQG3jKFep6VjGM/a2jPXOKuMrkyouFmRRyH5vUmlRm4z0/lU8lq2Tt6e1QmFvmX+L+dUnczmpx3GscnnGKjkTrjkUu14zhgcD9aR2xz2xVGTd9yNAQeanHakjG7k9aVqaMpIeDio25Jpw6Uxu9UjMKY9OzTWqiRidTUneo06mn0kMlT7popE+4aKoQ1ulRMO9TSDaSKhbmokdkxUYjocU8uXFRjgDHepcnHPHsKkcW7WEwAOaVRj2FORTkHvTyMDmkWo9QX5UPHWmE5FOf09KZnAzQNvoIT8wHYVbi6+1UhknIq9F0z7UGmHepAQCWJ9aYQAKc+dvHc1ExzQRJkqcr+NBHymnR8RGnY+UfSmaRjdIrH7wNdJ4UuBFdMpOAwrnmUh/arenSmK5Rh61N7O505fVeHxEZ+Z6vbsCgxUxFZmmziSFCD1FaSmvSpyuj9WozU4poaRQKcaTqK0NGiS3I38jNaaSDgVRseGPyg+9aAUYHyjPtXHiHqedi3qMlk9AKp7Sz5PNXzGD1phRV6CvMqK7PArw5mNii4qfAVaWOklPHFCVkaU4qMSvMeMZrB1vPkNj0rblPHNYuskGL61lLc8rH6o4mSzErRKTgk5OBk++KSGJVXpkZ698VqpArefJ5io0eFVedzE9SPTFQTW437SdoAzmtI6nl0qF3cgjRQM8fhWJeKBqh2sMsRWx8xyob5PT+lZurWzW13bSMAA3P610W0O7G0v3C5Vs1/kasVmFgb+LIzmqT2o+3xLjgqa3lhxApDAZAPArJ1AeXcqxY5C5FTFaXKlhIujeS1KV7EEJAxWM4DSnaPlFXb+QklQSSevPSreiaWbgNNN8sK8jPemtDxKtH2lX2dNGTLC0SBzwpqISK3fmp9TuPPuH2/6teFFUPetUedUSUrItbh7UhqufWpYVllJEaF/pVGVhegpr1I8bp99GX6ionp3JGoeTTxTFBAyelOoAlX7tFIv3TRTETXA5qBULHAFTDfKwGM1o28CwpvkHNTN6nr08O68rrYo/Z9keT1qNIiTVqZ/Mck8CkxgcdKhGjowv7uyI8Y+vSoyQDz0HNOZiTgVHL93APvQ2Y1H2GM2aRjhQKVBTG5PtQc7Yo7frVxOI+vaqZ447mrhGIT68Cg2o6XK7Enj0FREgmpHb7x/CmIMtzxQZSd2WBxGo9eKkjGSfpTOmM9qfD3NM7Iboa6/pRD8r+2alkXAPvUOCH9j1qGOS5JXO20C53QAdwcV08TbgK4Tw/OY5FB6HrXaQHgEdK6qE9D9Dyev7SirlukJoB4pDk9K6mz2rli0J3e1aAcVn2yFeTVveFHNcVZ3Z52J1ZOG/KkJyRimB8inJ9K5HG7POlS5mSr0zTHIwaViQMYqvIxY4ziplpoZVfd0Ipm5IHNZeogCMs/IAya1ZNqjGRWPcv587qgR4YF8yXccAgds+vtWMo3Z51eg6hREThY4HxgZlYAD7x9+/GKoakfKE7HHAwPrWja4LZP8AGc1ka6xICJ0Z8kVvCHu3JjQ/dOqv67EGlW3msGP3E6+5p3i23DWUUqjmNq27S1EFkgA+Y8n3qHVYfO06aM4yV4+tdMI+4elHCqeClB7tf8MUYH83TYGBP3RWBqdzm4bHYBRWjo0+NPkjc8x5x+NYJH2i5Y9s1m7W0PHx9e1CmobyJdOtDdXA3Z25yfeuj8Ruun6GY1ADygIoHYd6l0GxxGrMp+bnj0rA8bXRl1BID0iXp7mqitLswnSWCwUqj+KWn3nNmkxTqRas+VHBSxVVGWJwK9G0TRUtNPQMAZWG5j71y/hDT/tmoiVx+7i5+pr0wRnbgDArOptY+jyjL1Om601vsc1eaajggqD+Fc3qOhYJMPyn07V6JJFleRg1RurcMORzXOqjgZ4zLktUeVywSwMUlUjHSmV317pqSqQyZHvXNX2jPGS0HI/umuiFZS3PCq4eUDKH3KKVlZAVYEEdjRWxznQ2ungBWTvTL4g5ReEj6n1Na9ziCABR87cKP61lX0QRY4F+8/LVm1Y+6r0I0abhBf10RRtLdpm3EHHWrRtt6naPYVqR24gtljH32HP0qc2oiiJbAbGTTUApZfaNn8zkChDkHgjrUD/fOa0rxAis3dqoMvJJ6VJ89iKXI+UjIPUUzGF+tSSHgD9KawyKRxS3GDk+9X5RiMD3FU15YAVcuThQO9M3o6Rkyi55/WlhGWptPj4GaDnjqyRjkgDvU0fBwDUQwDnvUinDAD600dlPR3LEwyvFQuuJF9+tSq2Tg96dJgSqe2amR01EpK6L+lja3qVNdpYvuiBHSuSsY9svA5Zd2PSuq0/OzkYq6DufXZE3yGkhBFWord25A4qknB4rd08hohzk46YrrnO0bn0dWbjC5V2bBzULt83WtG4TnHFZ90mxTXEpc7POhP2krDTOB61aguFI4yWrNRe5q3aECToOldXsUo3O2VBKNy5I+Bk1AOcmluHwOnNRaZb3Ora1aafbNte4cJkdh3P5VwKLlI8j2XNJyeyIp5lJ2LlnPACiqH2oQaObSGNRLPKWkkEu7IHABX869AXwPLPpt8tpqUSQWso8545NyyMAcBDj5jjsOp4rz26tRZX5s1V1lt8pIGXA3deB1H41FaDjo9medi8TTlCUKTunZeeuv+ZGsAiiRs4IrJu4t9yn+zhj+dbF3k25GOnNZk7qJOg5TFdELcljupwj7FQ6GwWRI/mPA71RmZSSSfoKqW8zzgEDOOPxq7FZSPyVNaQ2sdVG/KrHGXwa1uJ1TgMD+Xam6NB5hA79a1fFFsIzHKBhvusKr6JhZyR0+U1z1E4ux8ljKTo4vley2+ep21vbrHEFXHypzx0ryjWpvtGqXUueDIcfhXqM915ds5XrsJ/SvI5TuLMepOa6be6jTiKaVGlBdbv7rf5kZ6AUoGaO9aOg2n2zVIIiMrnc30FSfLUaTq1FTju3Y77wfpwtLCNmHzkZP1NdIBVeyi2wqoPFXNnrUVD9JjQjRpqnHZKxA4BHFV3TJ5q9s9qjkT0zXHNHn16d9zNmgBBrOnthmt4rwR1qtPASKzueLXoLocbqulJcIWQbXHRhRXSywDHSito1pRVjyamFTdznkkE987EjEfAqrajz7953PGeKzvOaN3OcbutaemBfLLEGutan01Kv7eai+jb/AMjShIacsfypupTM0TYxzxUcbkk7RjHeq2oSmOMZPOea0vod9Sty0mY98fmCjtVInJ+nAqWVy8jE96rvwOPpWTPkcRPmbYw5bn8qR8dvpT8YBJpqD5uaRw2HxrhhUt2fmUUyLmRfrTrjmRaDVaQZUPYCpY1yKYBz0qZR8vFMzpxuxpGT7U4HLZpQpbp0oYAHFBuotaj1bnNTojSYPuBVeMZIFa9qiqmH43kYPpUs7sNT9o9TTsIXF2qyoFJUHA44rq7aEE/KOvqag0+5W/edmtka4MSxQ7Bg/KOAAOpNa9tpl6I4ZLaJri3mYrFKgPzsPvKBjJIqqS5anLDVH1+XU/q7XLs+5A0RQ81p6UxwVHSqku4lkcYkU8rnIqzpmBId2RXW5KcHY92Uo1abt0LlwQpyao3ZDpgCrt8ny59KijjVoiT6V52Hf7yzPLwz5ampl4xUtswWTJIApJRh8AYFJtO3oelexJXTR7kleNiSSVHOc4A/WrHhuW+tNWt7/St3mxyEKyEbxx8xA74FSeGneDUPOSASmPBDNkhDnqR6fjUsnhyLV7BdUOoWiCa4kTzvO2EtgscY5B4xzxzXBKnJXjT3PnsZjHQqvDQgnda3fR+XbodN4Y8WaT4d0/ULib7RdX9wzqI0fbsccq2D7k++RXn0nm3N7PeXLM887l2ZjksT3PvT7RYpriQx26RKh2BQMEgd29z3q40ILEHp6VlFSrJSmceDy2nJe0a/pGLOjEFc5JrOmtiSQeCOmfWun+zBpEOOOlMubRWQkDnPWt1BbHteyjaxiaCI4bxopAB5vK57N3FdI4CKNuPQ1i3doJE3RfLMhyCO1WLK/MkeycbZl+8p7+4qXeBzT/dadDlvGZzsA/56VlaCM3Lxt1xwPoa3PF0RaFpMdGDViWDCPUY3U8MMfmKzqau54WPhz4jnfkdBqMnlWFwRwVib+VeZntXoGtSf8Sm6f1jIrz89a0TvFHkZ7U5vZR7L9f8AgAO/qa67wFbAvNcMO4QVyA6CvRvB0Aj0eIkHMhLVUFdk8OUPa4xN/ZTf6fqdXa8oQ3Y1aUetVbRD8ylm4NXo4xnvn1NRNH3NSI3GRwM0xkz161aCEj2pSoIrkmjz6sCiYjjNMaPPWr+zPWmmP2rBo4KlK5lyW+elFX2TFFI4ZYZXPF9UO248tTx61LDeTW0QAoor0Tz5VJQqzlF2sTrqsnleWoH1qrczvIRvJJNFFO45YipUjaTK5PWo8Zcf3VGaKKRxz1GvkkAUDpRRSMCSHmQelLMMlTRRQar4CFQScZxUyjjHaiimh0kBfaCBUYBIz60UUMcnd2L2mw+bNg9hWo8eXWNf4Rj8aKKXQ93BU4+xT7s6LQoFiuk3B+m1WWQoVJ75Fe1+BLR9R1fTrOa/kszah3tNjcA7ecUUV2YdKKbR9FiV7PCycdLJ/kcd4rs7LStcuobLUEvI7NhHPISBukPPH97knp0xUNtMsikpHJgcn5TxRRXDCbi5yNcG2oSnfWyHXFxHNHhWqGOdY4yCaKKzpO87jovmndme8ytIfmBrT0vS7zVrpLW1eGKVwPLEx2+Zk4wv4c0UV6kZuWh24/Ezo0eaG/8AwBHtLrSZZrW9ubeC+WUW/k9Vk3Lu2yHpjBx2xWhpPiC0soYbZvDdlIkEMkRaEkeZITlZM9ODxwORRRXm03JV3FN21Pn8OvrdSM6r11/r8TPs7d44zJO2ZXO5zjvT53WMbm6UUV1xSWiPdpRStFbDGcbcjjj8qq3EnBHdulFFaRRolqRxx5YEdG5qK5s1nVWOUK/dYdQaKKUlqZTSehka0rSQPDcAByMB16N/ga4tWKFc9UNFFc9RWaPAzWKi42NPVpS2h3GMY45+prjD1/CiilT+FHyuZtuUL9v1YDoK9W8OIE0uzHT92tFFdFLdns8JJe2qPyX5nQRZE4zxkY5q2ByMmiipmj6+oixt4HpRj8KKK5JHnzQpXigpRRWDRzSSInj4zRRRUNGDSP/Z" alt="Нина Тесейко">
+    <p class="author-name">Нина Тесейко</p>
+    <p class="author-bio">
+      За плечами — годы в event-продакшне, контент-стратегии и бизнес-разработке
+      в креативных индустриях. Работала на стыке культуры, маркетинга и медиа:
+      от крупных международных проектов до запуска собственных контент-каналов.
+      Когда пришли ИИ-инструменты — начала встраивать их в реальные рабочие процессы
+      и поняла, что большинству людей просто не хватает нормального объяснения базовых правил.
+      Теперь помогаю это исправить.
+    </p>
+    <div class="author-tags">
+      <span class="author-tag">ИИ-инструменты</span>
+      <span class="author-tag">Контент</span>
+      <span class="author-tag">Стратегия</span>
+      <span class="author-tag">AI-персонажи</span>
     </div>
   </div>
 </section>
 
-<section class="early-bird fade-in">
-  <div class="container">
-    <div class="early-bird-inner">
-      <div class="eb-pulse">не упустите</div>
-      <div class="eb-headline">количество мест ограничено</div>
-      <div class="eb-detail">первые 5 билетов&nbsp;— по&nbsp;3&nbsp;000&nbsp;₽ вместо 3&nbsp;800&nbsp;₽</div>
-    </div>
+<!-- CTA -->
+<div class="section-divider"></div>
+
+<section class="cta-section">
+  <h2>Начните<br><em>сегодня</em></h2>
+  <p>
+    Выберите гайд и начните делегировать ИИ уже сегодня.
+    Или запишитесь на консультацию — разберём вашу конкретную ситуацию.
+  </p>
+  <div class="cta-buttons">
+    <a class="btn-lg btn-gold" href="https://t.me/nn_chnl" target="_blank">Записаться на консультацию</a>
+    <a class="btn-lg btn-outline" href="#products">Смотреть гайды</a>
   </div>
 </section>
 
-<div class="cta-wrap">
-  <div class="container">
-    <a class="cta" href="#" id="ticketLink">забронировать билет</a>
-    <div class="cta-note">бронирование через TimePad · оплата онлайн</div>
-    <div class="cta-finep">Возврат билетов осуществляется не позднее чем за 24 часа до мероприятия</div>
-  </div>
-</div>
-
-<section class="voci-block fade-in">
-  <div class="container">
-    <div class="voci-quote">
-      Voci dell'Opera — журнал об&nbsp;опере, балете и&nbsp;искусстве,
-      который собирает камерные встречи с&nbsp;артистами,
-      где вместо сцены — разговор за&nbsp;бокалом игристого.
-    </div>
-    <div class="voci-sig">с любовью к&nbsp;искусству</div>
-  </div>
-</section>
-
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="ornament" style="margin: 0 auto 4px;">
-      <span class="line"></span>
-      <span class="diamond"></span>
-      <span class="line"></span>
-    </div>
-    <div class="socials">
-      <a href="https://instagram.com/operavoci" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://t.me/operavoci" target="_blank" rel="noopener">Telegram</a>
-      <a href="https://vk.com/operavoci" target="_blank" rel="noopener">ВКонтакте</a>
-    </div>
-    <div class="legal">© Voci dell'Opera · 2026 · с&nbsp;любовью</div>
+  <span class="footer-logo">ИИ на вас работает</span>
+  <div class="footer-links">
+    <a href="https://t.me/nn_chnl" target="_blank">Telegram</a>
+    <a href="policy.html">Политика</a>
   </div>
+  <span class="footer-copy">© 2026</span>
 </footer>
 
 <script>
-  // Subtle reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+</script>
+
+<script>
+(function(){
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  let cols, drops;
+  const fontSize = 13;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cols = Math.floor(canvas.width / fontSize);
+    drops = Array(cols).fill(1);
+  }
+
+  function draw() {
+    ctx.fillStyle = 'rgba(7,10,13,0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < drops.length; i++) {
+      const rand = Math.random();
+      ctx.fillStyle = rand > 0.92 ? '#ffffff' : '#00E87A';
+      ctx.font = fontSize + 'px monospace';
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
       }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+      drops[i]++;
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  setInterval(draw, 45);
+})();
 </script>
 
 </body>
